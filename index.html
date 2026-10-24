@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cabinet BEH MINKO Architecture | Conception, plans et suivi de chantier au Cameroun</title>
+<meta name="description" content="Cabinet BEH MINKO Architecture : conception de maisons et bâtiments, plans et permis de construire, devis et métré, suivi de chantier au Cameroun.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#123A5E;
+    --blue-deep:#0C2A45;
+    --line:#BFD7EA;
+    --ochre:#E8B73A;
+    --on-ochre:#13202B;
+    --sheet-text:#F3F6F8;
+
+    --paper:#F3F6F8;
+    --surface:#FFFFFF;
+    --ink:#13202B;
+    --muted:#4A5B69;
+    --rule:#C9D3DB;
+    --link:#123A5E;
+
+    --display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
+    --body:"Source Sans 3","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      color-scheme: dark;
+      --paper:#0F1A24;
+      --surface:#15232F;
+      --ink:#E6EDF2;
+      --muted:#9FB0BE;
+      --rule:#2A3947;
+      --link:#BFD7EA;
+    }
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6}
+  img,svg{max-width:100%;display:block}
+  a{color:var(--link)}
+  :focus-visible{outline:3px solid var(--ochre);outline-offset:3px}
+  .wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+
+  /* ---------- En-tête ---------- */
+  .top{position:absolute;inset:0 0 auto 0;z-index:5}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:1.1rem;gap:1rem}
+  .brand{font-family:var(--display);font-weight:800;font-size:1.5rem;letter-spacing:.02em;color:var(--sheet-text);text-decoration:none;line-height:1}
+  .brand span{color:var(--ochre)}
+  .top nav{display:flex;gap:1.4rem;flex-wrap:wrap;justify-content:flex-end}
+  .top nav a{color:var(--sheet-text);text-decoration:none;font-weight:600;font-size:.98rem;opacity:.92}
+  .top nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+
+  /* ---------- Hero : planche de dessin ---------- */
+  .sheet{
+    position:relative;background-color:var(--blue);color:var(--sheet-text);
+    background-image:
+      linear-gradient(rgba(191,215,234,.12) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(191,215,234,.12) 1px,transparent 1px),
+      linear-gradient(rgba(191,215,234,.06) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(191,215,234,.06) 1px,transparent 1px);
+    background-size:96px 96px,96px 96px,24px 24px,24px 24px;
+    padding:7.5rem 0 4rem;
+    overflow:hidden;
+  }
+  .sheet .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:center}
+  .sheet h1{
+    font-family:var(--display);font-weight:800;text-transform:uppercase;
+    font-size:clamp(2.7rem,7.2vw,5.4rem);line-height:.95;letter-spacing:.01em;margin:0 0 1.4rem;
+  }
+  .sheet .lead{font-size:1.2rem;max-width:34rem;margin:0 0 2rem;color:#DCE8F2}
+  .actions{display:flex;gap:.9rem;flex-wrap:wrap}
+  .btn{
+    display:inline-block;font:600 1rem/1 var(--body);padding:1rem 1.5rem;text-decoration:none;
+    border:2px solid var(--ochre);cursor:pointer;border-radius:2px;
+  }
+  .btn.primary{background:var(--ochre);color:var(--on-ochre)}
+  .btn.primary:hover{background:#F2C75A;border-color:#F2C75A}
+  .btn.ghost{background:transparent;color:var(--sheet-text);border-color:rgba(243,246,248,.55)}
+  .btn.ghost:hover{border-color:var(--sheet-text)}
+
+  .drawing{position:relative}
+  .drawing svg{width:100%;height:auto}
+  .drawing .stroke{fill:none;stroke:var(--line);stroke-width:1.6;stroke-linecap:square;stroke-linejoin:miter}
+  .drawing .thin{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:5 5}
+  .drawing .dim{fill:none;stroke:var(--ochre);stroke-width:1.2}
+  .drawing text{fill:var(--line);font:600 13px var(--body)}
+  .drawing .dimtext{fill:var(--ochre)}
+  .draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.2s cubic-bezier(.5,0,.2,1) forwards}
+  .d1{animation-delay:.1s}.d2{animation-delay:.5s}.d3{animation-delay:.9s}.d4{animation-delay:1.3s}.d5{animation-delay:1.7s}
+  .fade{opacity:0;animation:fade .8s ease 2.4s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes fade{to{opacity:1}}
+
+  .cartouche{
+    margin-top:1.2rem;border:1.5px solid var(--line);font-size:.92rem;
+    display:grid;grid-template-columns:auto 1fr;
+  }
+  .cartouche dt,.cartouche dd{margin:0;padding:.45rem .8rem;border-bottom:1px solid rgba(191,215,234,.4)}
+  .cartouche dt{color:var(--line);border-right:1px solid rgba(191,215,234,.4)}
+  .cartouche dd{font-weight:600}
+  .cartouche dt:nth-last-of-type(1),.cartouche dd:last-of-type{border-bottom:0}
+
+  /* ---------- Sections ---------- */
+  section{padding:5rem 0}
+  h2{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(2rem,4.6vw,3.2rem);line-height:1;margin:0 0 1rem;letter-spacing:.01em}
+  .intro{max-width:40rem;color:var(--muted);margin:0 0 2.5rem}
+
+  .rows{border-top:2px solid var(--ink)}
+  .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:1.5rem;padding:1.4rem 0;border-bottom:1px solid var(--rule)}
+  .row h3{margin:0;font-family:var(--display);font-weight:700;font-size:1.7rem;line-height:1.05;position:relative;padding-left:1.1rem}
+  .row h3::before{content:"";position:absolute;left:0;top:.28em;width:.5rem;height:.5rem;background:var(--ochre)}
+  .row p{margin:0;color:var(--muted);max-width:38rem}
+
+  .band{background:var(--surface);border-block:1px solid var(--rule)}
+
+  .project{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center}
+  .project .plan{background:var(--blue);padding:1.2rem;border-radius:2px}
+  .project .plan svg{width:100%;height:auto}
+  .project .plan .stroke{fill:none;stroke:var(--line);stroke-width:1.4}
+  .project .plan .fill{fill:rgba(232,183,58,.18);stroke:var(--ochre);stroke-width:1.4}
+  .project .plan text{fill:var(--line);font:600 12px var(--body)}
+  .project h3{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.05;margin:0 0 .6rem}
+  .project p{color:var(--muted);margin:0 0 1rem}
+  .project .meta{font-weight:600;color:var(--ink)}
+  .slot{margin-top:2rem;border:1.5px dashed var(--rule);padding:1.4rem;color:var(--muted);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
+
+  .journal{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;border:2px solid var(--ink);padding:2rem}
+  .journal h2{margin-bottom:.5rem}
+  .journal p{margin:0;color:var(--muted);max-width:36rem}
+  .btn.dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .btn.dark:hover{opacity:.88}
+
+  /* ---------- Contact ---------- */
+  #contact{background:var(--blue-deep);color:var(--sheet-text)}
+  #contact .grid{display:grid;grid-template-columns:1fr 1.1fr;gap:3rem}
+  #contact .intro{color:#C9DAE8}
+  #contact a{color:var(--ochre)}
+  .infos{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+  form{display:grid;gap:1rem}
+  label{display:grid;gap:.35rem;font-weight:600;font-size:.98rem}
+  input,select,textarea{
+    font:400 1rem/1.4 var(--body);padding:.8rem .9rem;border:1.5px solid rgba(191,215,234,.5);
+    background:rgba(255,255,255,.07);color:var(--sheet-text);border-radius:2px;width:100%;
+  }
+  select option{color:#13202B}
+  textarea{min-height:8rem;resize:vertical}
+  input::placeholder,textarea::placeholder{color:#9FB6C9}
+  .note{font-size:.9rem;color:#B5C8D8;margin:0}
+
+  footer{background:var(--blue-deep);color:#9FB6C9;padding:1.6rem 0;font-size:.92rem;border-top:1px solid rgba(191,215,234,.2)}
+  footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+  /* ---------- Mobile ---------- */
+  @media (max-width:860px){
+    .sheet{padding-top:6.5rem}
+    .sheet .wrap,.project,#contact .grid,.journal{grid-template-columns:1fr}
+    .row{grid-template-columns:1fr;gap:.5rem}
+    .top .wrap{flex-direction:column;align-items:flex-start;gap:.5rem}
+    .top nav{justify-content:flex-start;gap:1rem}
+    section{padding:3.5rem 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .draw{animation:none;stroke-dashoffset:0}
+    .fade{animation:none;opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">BEH MINKO <span>Architecture</span></a>
+    <nav aria-label="Navigation principale">
+      <a href="#services">Services</a>
+      <a href="#approche">Approche</a>
+      <a href="#projets">Projets</a>
+      <a href="#journal">Plume &amp; Équerre</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="sheet">
+    <div class="wrap">
+      <div>
+        <h1>Construire juste, c'est construire une seule fois.</h1>
+        <p class="lead">Cabinet d'architecture au Cameroun. Nous concevons vos plans, chiffrons vos travaux et suivons votre chantier, pour que votre argent devienne un bâtiment solide.</p>
+        <div class="actions">
+          <a class="btn primary" href="#contact">Demander un devis</a>
+          <a class="btn ghost" href="#services">Voir nos services</a>
+        </div>
+      </div>
+
+      <div class="drawing">
+        <svg viewBox="0 0 640 360" role="img" aria-label="Dessin d'élévation d'une maison avec ses cotes">
+          <!-- cote de largeur -->
+          <path class="dim draw d4" pathLength="1" d="M90 40 H550 M90 31 V49 M550 31 V49"/>
+          <text class="dimtext fade" x="320" y="30" text-anchor="middle">12,00 m</text>
+          <!-- cote de hauteur -->
+          <path class="dim draw d4" pathLength="1" d="M604 290 V90 M595 290 H613 M595 90 H613"/>
+          <text class="dimtext fade" x="624" y="196" transform="rotate(90 624 196)" text-anchor="middle">H 3,60 m</text>
+
+          <!-- sol -->
+          <path class="stroke draw d1" pathLength="1" d="M20 290 H620"/>
+          <!-- murs -->
+          <path class="stroke draw d1" pathLength="1" d="M90 290 V162 H550 V290"/>
+          <!-- toiture -->
+          <path class="stroke draw d2" pathLength="1" d="M66 164 L200 92 H440 L574 164 Z"/>
+          <!-- porche -->
+          <path class="stroke draw d3" pathLength="1" d="M245 207 L320 172 L395 207 Z"/>
+          <path class="stroke draw d3" pathLength="1" d="M265 207 V290 M375 207 V290"/>
+          <!-- porte -->
+          <path class="stroke draw d3" pathLength="1" d="M292 290 V218 H348 V290 M320 218 V290"/>
+          <!-- fenêtres -->
+          <path class="stroke draw d3" pathLength="1" d="M130 252 V198 H202 V252 Z M166 198 V252 M130 225 H202"/>
+          <path class="stroke draw d3" pathLength="1" d="M438 252 V198 H510 V252 Z M474 198 V252 M438 225 H510"/>
+
+          <!-- axes -->
+          <path class="thin fade" d="M90 296 V318 M550 296 V318"/>
+          <circle class="stroke fade" cx="90" cy="332" r="13"/>
+          <circle class="stroke fade" cx="550" cy="332" r="13"/>
+          <text class="fade" x="90" y="337" text-anchor="middle">A</text>
+          <text class="fade" x="550" y="337" text-anchor="middle">B</text>
+        </svg>
+
+        <dl class="cartouche">
+          <dt>Cabinet</dt><dd>BEH MINKO Architecture</dd>
+          <dt>Direction</dt><dd>BEH MINKO Junior Claudel</dd>
+          <dt>Lieu</dt><dd>Cameroun</dd>
+          <dt>Échelle</dt><dd>1/50</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <h2>Ce que nous faisons</h2>
+      <p class="intro">De l'idée au chantier terminé, un seul interlocuteur pour votre projet.</p>
+      <div class="rows">
+        <div class="row">
+          <h3>Conception de plans</h3>
+          <p>Maisons, villas, immeubles et locaux commerciaux. Plans d'architecture adaptés à votre terrain, à votre famille et à votre budget.</p>
+        </div>
+        <div class="row">
+          <h3>Dossier de permis de construire</h3>
+          <p>Préparation des plans et pièces demandés par l'administration, pour déposer un dossier complet du premier coup.</p>
+        </div>
+        <div class="row">
+          <h3>Métré et devis</h3>
+          <p>Quantités de matériaux et coût des travaux en FCFA, poste par poste : fondations, élévation, toiture, finitions. Vous savez ce que vous allez payer avant de commencer.</p>
+        </div>
+        <div class="row">
+          <h3>Suivi de chantier</h3>
+          <p>Visites régulières pour vérifier les fondations, le béton, les armatures et la qualité d'exécution, jusqu'à la réception des travaux.</p>
+        </div>
+        <div class="row">
+          <h3>Conseil avant d'acheter ou de construire</h3>
+          <p>Choix du terrain, orientation de la maison, matériaux, entrepreneurs. Une heure de conseil peut vous éviter des années de réparations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROCHE -->
+  <section id="approche" class="band">
+    <div class="wrap">
+      <h2>Notre façon de travailler</h2>
+      <p class="intro">Trois principes guident chaque projet, petit ou grand.</p>
+      <div class="rows">
+        <div class="row">
+          <h3>Penser le climat d'abord</h3>
+          <p>Orientation, ventilation naturelle, protection contre le soleil et la pluie, matériaux locaux. Un bâtiment bien pensé reste frais et coûte moins cher à vivre.</p>
+        </div>
+        <div class="row">
+          <h3>Chiffrer avant de construire</h3>
+          <p>Chaque plan est accompagné d'un devis clair. Pas de surprise en cours de chantier, pas de travaux abandonnés faute d'argent.</p>
+        </div>
+        <div class="row">
+          <h3>Expliquer simplement</h3>
+          <p>Vous financez le projet, vous devez le comprendre. Nous expliquons chaque choix en mots simples et nous répondons à vos questions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projets">
+    <div class="wrap">
+      <h2>Projets</h2>
+      <p class="intro">Une première réalisation d'étude, et la place pour vos futurs chantiers.</p>
+
+      <article class="project">
+        <div class="plan">
+          <svg viewBox="0 0 400 260" role="img" aria-label="Schéma de plan d'un centre culturel">
+            <rect class="stroke" x="30" y="30" width="340" height="200" fill="none"/>
+            <rect class="fill" x="50" y="50" width="130" height="90"/>
+            <rect class="stroke" x="195" y="50" width="155" height="60" fill="none"/>
+            <rect class="stroke" x="195" y="122" width="155" height="88" fill="none"/>
+            <rect class="stroke" x="50" y="155" width="130" height="55" fill="none"/>
+            <text x="62" y="98">Salle culturelle</text>
+            <text x="207" y="84">Restaurant</text>
+            <text x="207" y="170">Patio</text>
+            <text x="62" y="186">Accueil</text>
+          </svg>
+        </div>
+        <div>
+          <h3>Centre culturel bioclimatique, Ebolowa</h3>
+          <p>Projet de fin d'études en licence d'architecture : un centre culturel avec restaurant, pensé pour le climat local, la ventilation naturelle et la valorisation de la culture camerounaise.</p>
+          <p class="meta">Projet académique, ISABEE, Université d'Ebolowa</p>
+        </div>
+      </article>
+
+      <div class="slot">
+        <span>Votre projet pourrait être le prochain à figurer ici.</span>
+        <a class="btn dark" href="#contact">Parlons de votre projet</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLUME & EQUERRE -->
+  <section id="journal" class="band">
+    <div class="wrap">
+      <div class="journal">
+        <div>
+          <h2>Plume &amp; Équerre</h2>
+          <p>Notre page de sensibilisation : conseils pour bien construire, alertes sur les erreurs et les arnaques fréquentes, histoire et architecture des bâtiments du Cameroun.</p>
+        </div>
+        <!-- Remplacez # par le lien réel de votre page Facebook -->
+        <a class="btn dark" href="#" rel="noopener">Suivre la page Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap grid">
+      <div>
+        <h2>Parlons de votre projet</h2>
+        <p class="intro">Décrivez ce que vous voulez construire. Vous recevrez une réponse sur WhatsApp.</p>
+        <ul class="infos">
+          <li>Responsable : BEH MINKO Junior Claudel</li>
+          <li>Zone d'intervention : Cameroun</li>
+          <li>Téléphone / WhatsApp : <a href="#" id="tel">+237 697 96 57 88</a></li>
+        </ul>
+      </div>
+
+      <form id="form" novalidate>
+        <label>Votre nom
+          <input id="nom" name="nom" autocomplete="name" placeholder="Ex. Marie Ndzana" required>
+        </label>
+        <label>Type de projet
+          <select id="type" name="type">
+            <option>Construction d'une maison</option>
+            <option>Plan de maison ou d'immeuble</option>
+            <option>Devis et métré</option>
+            <option>Suivi de chantier</option>
+            <option>Conseil avant d'acheter un terrain</option>
+            <option>Autre</option>
+          </select>
+        </label>
+        <label>Votre message
+          <textarea id="msg" name="msg" placeholder="Où se trouve le terrain ? Quelle surface ? Quel budget approximatif ?"></textarea>
+        </label>
+        <button class="btn primary" type="submit">Envoyer sur WhatsApp</button>
+        <p class="note" id="err" role="alert" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Cabinet BEH MINKO Architecture. Tous droits réservés.</span>
+    <span>Cameroun</span>
+  </div>
+</footer>
+
+<script>
+  // À MODIFIER : votre numéro WhatsApp au format international, sans + ni espaces (ex. 237677123456)
+  var WHATSAPP = "237697965788";
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("tel").href = "https://wa.me/" + WHATSAPP;
+
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nom = document.getElementById("nom").value.trim();
+    var type = document.getElementById("type").value;
+    var msg = document.getElementById("msg").value.trim();
+    var err = document.getElementById("err");
+    if (!nom) { err.textContent = "Indiquez votre nom pour que nous puissions vous répondre."; document.getElementById("nom").focus(); return; }
+    err.textContent = "";
+    var text = "Bonjour, je m'appelle " + nom + ". Projet : " + type + "." + (msg ? "\n" + msg : "");
+    window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+  });
+</script>
+</body>
+</html>
